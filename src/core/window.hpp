@@ -10,6 +10,11 @@
 
 namespace vi
 {
+	enum class RenderingBackend
+	{
+		OpenGL
+	};
+
 	class Window
 	{
 	public:
@@ -20,7 +25,7 @@ namespace vi
 		 * @param height	Height of the window in pixels
 		 * @param title		Title of the window
 		 */
-		Window(std::uint32_t width, std::uint32_t height, const char* title);
+		Window(std::uint32_t width, std::uint32_t height, const char* title, RenderingBackend backend);
 
 		/**
 		 * Check if the window is still open
@@ -62,6 +67,13 @@ namespace vi
 			std::int32_t scancode,
 			std::int32_t action,
 			std::int32_t mods);
+
+	private:
+		//#TODO: portable and abstracted method to pass OpenGL version information to this function
+		/**
+		 * Set the window hints for an OpenGL context
+		 */
+		void ConfigureOpenGLWindowHints();
 
 	private:
 		/** Current width of the window in pixels */

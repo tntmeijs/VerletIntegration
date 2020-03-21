@@ -19,7 +19,7 @@ add_executable(${TARGET_NAME} ${SRC_FILES} ${CORE_FILES} ${GRAPHICS_FILES} ${UTI
 
 # Includes
 target_include_directories(${TARGET_NAME} PRIVATE ./)
-target_include_directories(${TARGET_NAME} PRIVATE _deps/glad/GL/include)
+target_include_directories(${TARGET_NAME} PRIVATE ../_deps/glad/GL/include)
 
 # Set compile features such as C++17
 target_compile_features(${TARGET_NAME} PRIVATE cxx_std_17)

@@ -1,7 +1,7 @@
 #include "window.hpp"
 #include "utility/log.hpp"
 
-vi::Window::Window(std::uint32_t width, std::uint32_t height, const char* title) :
+vi::Window::Window(std::uint32_t width, std::uint32_t height, const char* title, RenderingBackend backend) :
 	m_width(width),
 	m_height(height),
 	m_title(title),
@@ -14,6 +14,18 @@ vi::Window::Window(std::uint32_t width, std::uint32_t height, const char* title)
 	}
 
 	LOG_INFO("GLFW initialized.");
+
+	// Configure window hints
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+
+	switch (backend)
+	{
+		case vi::RenderingBackend::OpenGL:
+			ConfigureOpenGLWindowHints();
+			break;
+		default:
+			break;
+	}
 
 	m_handle = glfwCreateWindow(m_width, m_height, m_title, nullptr, nullptr);
 	if (!m_handle)
@@ -81,4 +93,11 @@ void vi::Window::KeyCallbackStatic(
 	{
 		instance->OnKeyReleased(keycode);
 	}
+}
+
+void vi::Window::ConfigureOpenGLWindowHints()
+{
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 }

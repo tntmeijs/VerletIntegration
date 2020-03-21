@@ -1,6 +1,7 @@
 #include "core/window.hpp"
-#include "utility/timer.hpp"
+#include "graphics/renderer.hpp"
 #include "utility/literals.hpp"
+#include "utility/timer.hpp"
 
 constexpr double PHYSICS_MAX_TIME = 0.25;
 constexpr double PHYSICS_TIMESTEP = 50_Hz;
@@ -8,7 +9,8 @@ constexpr double PHYSICS_TIMESTEP = 50_Hz;
 // Main loop fixed timestep logic from: https://gafferongames.com/post/fix_your_timestep/
 int main()
 {
-	vi::Window window(1280, 720, "Tahar's Verlet Integration");
+	vi::Window window(1280, 720, "Tahar's Verlet Integration", vi::RenderingBackend::OpenGL);
+	vi::Renderer renderer;
 
 	//#TODO: Move this to a proper input manager
 	window.OnKeyPressed = [&window](vi::Keycode key) {
