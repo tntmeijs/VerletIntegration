@@ -60,6 +60,21 @@ void vi::Window::PollInput() const
 	glfwPollEvents();
 }
 
+std::uint32_t vi::Window::GetWidth() const
+{
+	return m_width;
+}
+
+std::uint32_t vi::Window::GetHeight() const
+{
+	return m_height;
+}
+
+GLFWwindow* const vi::Window::GetHandle() const
+{
+	return m_handle;
+}
+
 void vi::Window::KeyCallbackStatic(
 	GLFWwindow* window,
 	std::int32_t key,

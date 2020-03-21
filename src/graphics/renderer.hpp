@@ -5,10 +5,14 @@
 
 namespace vi
 {
+	class Window;
+
 	class Renderer
 	{
 	public:
-		Renderer();
+		Renderer(const Window& window);
+
+		void Render(const Window& window);
 	};
 }
 

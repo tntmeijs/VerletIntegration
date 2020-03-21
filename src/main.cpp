@@ -10,7 +10,7 @@ constexpr double PHYSICS_TIMESTEP = 50_Hz;
 int main()
 {
 	vi::Window window(1280, 720, "Tahar's Verlet Integration", vi::RenderingBackend::OpenGL);
-	vi::Renderer renderer;
+	vi::Renderer renderer(window);
 
 	//#TODO: Move this to a proper input manager
 	window.OnKeyPressed = [&window](vi::Keycode key) {
@@ -56,7 +56,8 @@ int main()
 		double interpolation = accumulator / PHYSICS_TIMESTEP;
 		interpolation;	// prevents an unused parameter warning
 
-		//#TODO: render
+		//#TODO: render with interpolation
+		renderer.Render(window);
 
 		// Loop timer needs to update after all logic is done
 		timer.Tick();

@@ -45,6 +45,25 @@ namespace vi
 		 */
 		void PollInput() const;
 
+		/**
+		 * Get the width of the window's client area in pixels
+		 *
+		 * @return	Window width in pixels
+		 */
+		std::uint32_t GetWidth() const;
+
+		/**
+		 * Get the height of the window's client area in pixels
+		 *
+		 * @return	Window height in pixels
+		 */
+		std::uint32_t GetHeight() const;
+
+		/**
+		 * Get a handle to the window
+		 */
+		GLFWwindow* const GetHandle() const;
+
 	public:
 		/**
 		 * Key pressed callback

@@ -23,6 +23,7 @@ target_include_directories(${TARGET_NAME} PRIVATE ../_deps/glad/GL/include)
 
 # Set compile features such as C++17
 target_compile_features(${TARGET_NAME} PRIVATE cxx_std_17)
+target_compile_definitions(${TARGET_NAME} PRIVATE GLFW_INCLUDE_NONE)
 
 # Link external libaries
 target_link_libraries(${TARGET_NAME} PRIVATE glfw ${GLFW_LIBRARIES})
