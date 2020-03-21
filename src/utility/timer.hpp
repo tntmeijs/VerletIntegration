@@ -8,9 +8,6 @@ namespace vi
 	class Timer
 	{
 	public:
-		Timer();
-		~Timer();
-
 		/**
 		 * Start recording a time interval
 		 */
