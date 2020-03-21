@@ -11,19 +11,19 @@ namespace vi
 		/**
 		 * Start recording a time interval
 		 */
-		void Start();
+		void Reset();
 
 		/**
 		 * Update the timer to the current time
 		 */
-		void Update();
+		void Tick();
 
 		/**
 		 * Get the current time since the start
 		 *
 		 * @return	Time since the start of the timer
 		 */
-		float Duration() const;
+		double Duration() const;
 
 	private:
 		/** Timestamp when the clock was started */
