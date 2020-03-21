@@ -10,6 +10,14 @@ int main()
 {
 	vi::Window window(1280, 720, "Tahar's Verlet Integration");
 
+	//#TODO: Move this to a proper input manager
+	window.OnKeyPressed = [&window](vi::Keycode key) {
+		if (key == vi::Keycode::Escape)
+		{
+			window.Close();
+		}
+	};
+
 	// Main loop timer
 	vi::Timer timer;
 	timer.Reset();
@@ -20,6 +28,7 @@ int main()
 	// The engine will run until the window needs to close
 	while (window.IsOpen())
 	{
+		window.PollInput();
 		//#TODO: peek messages and handle user input
 
 		double frame_time = timer.Duration();

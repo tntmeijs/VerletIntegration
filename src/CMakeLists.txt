@@ -2,7 +2,8 @@ set(SRC_FILES main.cpp)
 
 set(CORE_FILES
     core/window.cpp
-    core/window.hpp)
+    core/window.hpp
+    core/keycodes.hpp)
 
 set(GRAPHICS_FILES
     graphics/renderer.cpp
