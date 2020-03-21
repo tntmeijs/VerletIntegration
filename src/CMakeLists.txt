@@ -11,7 +11,8 @@ set(GRAPHICS_FILES
 set(UTILITY_FILES
     utility/timer.cpp
     utility/timer.hpp
-    utility/log.hpp)
+    utility/log.hpp
+    utility/literals.hpp)
 
 add_executable(${TARGET_NAME} ${SRC_FILES} ${CORE_FILES} ${GRAPHICS_FILES} ${UTILITY_FILES})
 
