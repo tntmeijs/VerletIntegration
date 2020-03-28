@@ -13,7 +13,6 @@ set(OPENGL_FILES
 
 set(GRAPHICS_FILES
     graphics/renderer.hpp
-    graphics/shader.cpp
     graphics/shader.hpp
     graphics/renderer_factory.cpp
     graphics/renderer_factory.hpp
