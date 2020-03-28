@@ -5,9 +5,19 @@ set(CORE_FILES
     core/window.hpp
     core/keycodes.hpp)
 
+set(OPENGL_FILES
+    graphics/gl/gl_renderer.cpp
+    graphics/gl/gl_renderer.hpp
+    graphics/gl/gl_shader.cpp
+    graphics/gl/gl_shader.hpp)
+
 set(GRAPHICS_FILES
-    graphics/renderer.cpp
-    graphics/renderer.hpp)
+    graphics/renderer.hpp
+    graphics/shader.cpp
+    graphics/shader.hpp
+    graphics/renderer_factory.cpp
+    graphics/renderer_factory.hpp
+    graphics/graphics_enums.hpp)
 
 set(UTILITY_FILES
     utility/timer.cpp
@@ -15,7 +25,7 @@ set(UTILITY_FILES
     utility/log.hpp
     utility/literals.hpp)
 
-add_executable(${TARGET_NAME} ${SRC_FILES} ${CORE_FILES} ${GRAPHICS_FILES} ${UTILITY_FILES})
+add_executable(${TARGET_NAME} ${SRC_FILES} ${CORE_FILES} ${GRAPHICS_FILES} ${UTILITY_FILES} ${OPENGL_FILES})
 
 # Includes
 target_include_directories(${TARGET_NAME} PRIVATE ./)
@@ -31,10 +41,11 @@ target_link_libraries(${TARGET_NAME} PRIVATE glm)
 target_link_libraries(${TARGET_NAME} PRIVATE glad)
 
 # Make the filter tree look nice in IDEs that support them
-source_group(src            FILES ${SRC_FILES})
-source_group(src\\core      FILES ${CORE_FILES})
-source_group(src\\graphics  FILES ${GRAPHICS_FILES})
-source_group(src\\utility   FILES ${UTILITY_FILES})
+source_group(src                    FILES ${SRC_FILES})
+source_group(src\\core              FILES ${CORE_FILES})
+source_group(src\\graphics          FILES ${GRAPHICS_FILES})
+source_group(src\\graphics\\opengl  FILES ${OPENGL_FILES})
+source_group(src\\utility           FILES ${UTILITY_FILES})
 
 # Warning level 4 and treat all warnings as errors
 if(MSVC)

@@ -1,7 +1,12 @@
 #include "core/window.hpp"
+#include "graphics/graphics_enums.hpp"
 #include "graphics/renderer.hpp"
+#include "graphics/renderer_factory.hpp"
 #include "utility/literals.hpp"
+#include "utility/log.hpp"
 #include "utility/timer.hpp"
+
+#include <memory>
 
 constexpr double PHYSICS_MAX_TIME = 0.25;
 constexpr double PHYSICS_TIMESTEP = 50_Hz;
@@ -10,7 +15,13 @@ constexpr double PHYSICS_TIMESTEP = 50_Hz;
 int main()
 {
 	vi::Window window(1280, 720, "Tahar's Verlet Integration", vi::RenderingBackend::OpenGL);
-	vi::Renderer renderer(window);
+	auto renderer = vi::RendererFactory::CreateRenderer(vi::RenderingBackend::OpenGL, window);
+
+	if (!renderer)
+	{
+		LOG_FATAL("Factory did not create a valid renderer object.");
+		return -1;
+	}
 
 	//#TODO: Move this to a proper input manager
 	window.OnKeyPressed = [&window](vi::Keycode key) {
@@ -26,6 +37,13 @@ int main()
 
 	// Stores "excess" frame time
 	double accumulator = 0.0;
+
+	// Attempt to initialize the renderer
+	if (!renderer->Initialize())
+	{
+		LOG_FATAL("Renderer initialized unsuccessfully.");
+		return -1;
+	}
 
 	// The engine will run until the window needs to close
 	while (window.IsOpen())
@@ -57,7 +75,9 @@ int main()
 		interpolation;	// prevents an unused parameter warning
 
 		//#TODO: render with interpolation
-		renderer.Render(window);
+		renderer->PreRender();
+		renderer->Render();
+		renderer->PostRender();
 
 		// Loop timer needs to update after all logic is done
 		timer.Tick();

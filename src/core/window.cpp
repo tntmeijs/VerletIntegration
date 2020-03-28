@@ -5,7 +5,8 @@ vi::Window::Window(std::uint32_t width, std::uint32_t height, const char* title,
 	m_width(width),
 	m_height(height),
 	m_title(title),
-	m_handle(nullptr)
+	m_handle(nullptr),
+	m_graphics_backend(backend)
 {
 	if (!glfwInit())
 	{
@@ -73,6 +74,11 @@ std::uint32_t vi::Window::GetHeight() const
 GLFWwindow* const vi::Window::GetHandle() const
 {
 	return m_handle;
+}
+
+vi::RenderingBackend vi::Window::GetRenderingBackend() const
+{
+	return m_graphics_backend;
 }
 
 void vi::Window::KeyCallbackStatic(

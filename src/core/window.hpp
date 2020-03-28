@@ -2,6 +2,7 @@
 #define WINDOW_HPP
 
 #include "keycodes.hpp"
+#include "graphics/graphics_enums.hpp"
 
 #include "GLFW/glfw3.h"
 
@@ -10,11 +11,6 @@
 
 namespace vi
 {
-	enum class RenderingBackend
-	{
-		OpenGL
-	};
-
 	class Window
 	{
 	public:
@@ -64,6 +60,11 @@ namespace vi
 		 */
 		GLFWwindow* const GetHandle() const;
 
+		/**
+		 * Get the active rendering back-end for this window
+		 */
+		RenderingBackend GetRenderingBackend() const;
+
 	public:
 		/**
 		 * Key pressed callback
@@ -106,6 +107,9 @@ namespace vi
 
 		/** Window handle to this window */
 		GLFWwindow* m_handle;
+
+		/** Rendering back-end set for this window */
+		RenderingBackend m_graphics_backend;
 	};
 }
 
