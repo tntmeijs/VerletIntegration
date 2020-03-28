@@ -2,9 +2,38 @@
 #define GRAPHICS_SHADER_HPP
 
 #include <memory>
+#include <string_view>
+#include <vector>
 
 namespace vi
 {
+	/**
+	 * All available shader types
+	 */
+	enum class ShaderType
+	{
+		VertexShader,
+		ComputeShader,
+		PixelShader
+	};
+
+	/**
+	 * A single shader source file and it's type
+	 */
+	struct ShaderSource
+	{
+		ShaderType type;
+		std::string_view file;
+	};
+
+	/**
+	 * All shader sources that makes up a single shader
+	 */
+	struct ShaderLoadInfo
+	{
+		std::vector<ShaderSource> sources;
+	};
+
 	/**
 	 * Base class for loading and using shaders
 	 */
@@ -13,17 +42,18 @@ namespace vi
 	public:
 		/**
 		 * Load a new shader from a source file
+		 * @param load_info	Information needed to create a shader
 		 *
 		 * @return	True when the shader was loaded successfully, false otherwise
 		 */
-		virtual bool Load() = 0;
+		virtual bool Load(const ShaderLoadInfo& load_info) = 0;
 
 		/**
 		 * Get a pointer to the underlaying shader handle
 		 *
 		 * @return	Weak pointer to the shader handle
 		 */
-		virtual const std::weak_ptr<void> const Get() = 0;
+		std::weak_ptr<void> Get() { return m_handle; }
 
 	protected:
 		/** Handle to use the shader in the renderer */
