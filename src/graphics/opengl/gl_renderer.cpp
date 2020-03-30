@@ -5,13 +5,12 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
-vi::gl::GLRenderer::GLRenderer(const Window& window) :
-	Renderer(window),
+vi::gl::GLRenderer::GLRenderer() :
 	vao(0),
 	vbo(0)
 {}
 
-bool vi::gl::GLRenderer::Initialize()
+bool vi::gl::GLRenderer::Initialize(std::uint32_t width, std::uint32_t height)
 {
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
@@ -23,7 +22,7 @@ bool vi::gl::GLRenderer::Initialize()
 
 	glEnable(GL_DEPTH);
 	glClearColor(255, 255, 0, 255);
-	glViewport(0, 0, m_window.GetWidth(), m_window.GetHeight());
+	glViewport(0, 0, width, height);
 
 	float points[] =
 	{
@@ -67,8 +66,6 @@ void vi::gl::GLRenderer::Render()
 	glBindVertexArray(vao);
 	cloth_shader.Use();
 	glDrawArrays(GL_TRIANGLES, 0, 3);
-
-	glfwSwapBuffers(m_window.GetHandle());
 }
 
 void vi::gl::GLRenderer::PostRender()

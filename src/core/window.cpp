@@ -81,6 +81,11 @@ vi::RenderingBackend vi::Window::GetRenderingBackend() const
 	return m_graphics_backend;
 }
 
+void vi::Window::NextFrame() const
+{
+	glfwSwapBuffers(m_handle);
+}
+
 void vi::Window::KeyCallbackStatic(
 	GLFWwindow* window,
 	std::int32_t key,

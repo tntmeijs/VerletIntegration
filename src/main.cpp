@@ -1,7 +1,6 @@
 #include "core/window.hpp"
 #include "graphics/graphics_enums.hpp"
 #include "graphics/renderer.hpp"
-#include "graphics/renderer_factory.hpp"
 #include "utility/literals.hpp"
 #include "utility/log.hpp"
 #include "utility/timer.hpp"
@@ -15,7 +14,7 @@ constexpr double PHYSICS_TIMESTEP = 50_Hz;
 int main()
 {
 	vi::Window window(1280, 720, "Tahar's Verlet Integration", vi::RenderingBackend::OpenGL);
-	auto renderer = vi::RendererFactory::CreateRenderer(vi::RenderingBackend::OpenGL, window);
+	auto renderer = vi::Renderer::Create(vi::RenderingBackend::OpenGL);
 
 	if (!renderer)
 	{
@@ -39,7 +38,7 @@ int main()
 	double accumulator = 0.0;
 
 	// Attempt to initialize the renderer
-	if (!renderer->Initialize())
+	if (!renderer->Initialize(window.GetWidth(), window.GetHeight()))
 	{
 		LOG_FATAL("Renderer initialized unsuccessfully.");
 		return -1;
@@ -78,6 +77,8 @@ int main()
 		renderer->PreRender();
 		renderer->Render();
 		renderer->PostRender();
+
+		window.NextFrame();
 
 		// Loop timer needs to update after all logic is done
 		timer.Tick();

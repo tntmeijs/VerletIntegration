@@ -9,14 +9,16 @@ set(OPENGL_FILES
     graphics/opengl/gl_renderer.cpp
     graphics/opengl/gl_renderer.hpp
     graphics/opengl/gl_shader.cpp
-    graphics/opengl/gl_shader.hpp)
+    graphics/opengl/gl_shader.hpp
+    graphics/opengl/gl_mesh.cpp
+    graphics/opengl/gl_mesh.hpp)
 
 set(GRAPHICS_FILES
+    graphics/renderer.cpp
     graphics/renderer.hpp
     graphics/shader.hpp
-    graphics/renderer_factory.cpp
-    graphics/renderer_factory.hpp
-    graphics/graphics_enums.hpp)
+    graphics/graphics_enums.hpp
+    graphics/mesh.hpp)
 
 set(UTILITY_FILES
     utility/timer.cpp

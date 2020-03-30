@@ -22,14 +22,17 @@ namespace vi
 			/**
 			 * Initialize members, initialize the base class
 			 */
-			GLRenderer(const Window& window);
+			GLRenderer();
 
 			/**
 			 * Initialize the renderer
 			 *
+			 * @param width		Initial width of the swapchain's back buffer
+			 * @param height	Initial height of the swapchain's back buffer
+			 *
 			 * @return	True when initialized successfully, false on error
 			 */
-			bool Initialize() final override;
+			bool Initialize(std::uint32_t width, std::uint32_t height) final override;
 
 			/**
 			 * Perform any actions to prepare for rendering (e.g. cull objects)

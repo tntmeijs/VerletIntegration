@@ -65,6 +65,11 @@ namespace vi
 		 */
 		RenderingBackend GetRenderingBackend() const;
 
+		/**
+		 * Swap the back buffer
+		 */
+		void NextFrame() const;
+
 	public:
 		/**
 		 * Key pressed callback
