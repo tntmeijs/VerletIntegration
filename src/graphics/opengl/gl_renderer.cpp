@@ -27,10 +27,9 @@ bool vi::gl::GLRenderer::Initialize()
 
 	float points[] =
 	{
-		-0.5f,  0.5f, 0.0f,
-		 0.5f,  0.5f, 0.0f,
+		-0.5f, -0.5f, 0.0f,
 		 0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f
+		 0.0f,  0.5f, 0.0f
 	};
 
 	glGenBuffers(1, &vbo);
@@ -48,6 +47,13 @@ bool vi::gl::GLRenderer::Initialize()
 
 	LOG_INFO("OpenGL renderer initialized.");
 
+	//#TODO: create a resource loader
+	//#DEBUG: this is all temporary
+	ShaderSource vertex_shader = { ShaderType::VertexShader, "./resources/shaders/opengl/cloth_vs.glsl" };
+	ShaderSource pixel_shader = { ShaderType::PixelShader, "./resources/shaders/opengl/cloth_ps.glsl" };
+	ShaderCreateInfo create_info = { { vertex_shader, pixel_shader } };
+	cloth_shader.Create(create_info);
+
 	return true;
 }
 
@@ -58,7 +64,9 @@ void vi::gl::GLRenderer::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//glDrawArrays(GL_POINTS, 0, 4);
+	glBindVertexArray(vao);
+	cloth_shader.Use();
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	glfwSwapBuffers(m_window.GetHandle());
 }

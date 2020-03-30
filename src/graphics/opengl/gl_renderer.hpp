@@ -2,6 +2,7 @@
 #define GRAPHICS_GL_RENDERER_HPP
 
 #include "graphics/renderer.hpp"
+#include "graphics/opengl/gl_shader.hpp"
 
 #include <cstdint>
 
@@ -49,6 +50,7 @@ namespace vi
 			// This is all temporary until we have a few points rendering on screen
 			std::uint32_t vao;
 			std::uint32_t vbo;
+			GLShader cloth_shader;
 		};
 	}
 }

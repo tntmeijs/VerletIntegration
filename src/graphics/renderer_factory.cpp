@@ -1,7 +1,7 @@
 #include "renderer_factory.hpp"
 #include "renderer.hpp"
 #include "utility/log.hpp"
-#include "gl/gl_renderer.hpp"
+#include "opengl/gl_renderer.hpp"
 
 using namespace vi;
 using namespace vi::gl;

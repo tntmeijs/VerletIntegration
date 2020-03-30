@@ -1,6 +1,7 @@
 #ifndef GRAPHICS_SHADER_HPP
 #define GRAPHICS_SHADER_HPP
 
+#include <algorithm>
 #include <memory>
 #include <string_view>
 #include <vector>
@@ -29,7 +30,7 @@ namespace vi
 	/**
 	 * All shader sources that makes up a single shader
 	 */
-	struct ShaderLoadInfo
+	struct ShaderCreateInfo
 	{
 		std::vector<ShaderSource> sources;
 	};
@@ -41,23 +42,12 @@ namespace vi
 	{
 	public:
 		/**
-		 * Load a new shader from a source file
+		 * Create a new shader from source files
 		 * @param load_info	Information needed to create a shader
 		 *
 		 * @return	True when the shader was loaded successfully, false otherwise
 		 */
-		virtual bool Load(const ShaderLoadInfo& load_info) = 0;
-
-		/**
-		 * Get a pointer to the underlaying shader handle
-		 *
-		 * @return	Weak pointer to the shader handle
-		 */
-		std::weak_ptr<void> Get() { return m_handle; }
-
-	protected:
-		/** Handle to use the shader in the renderer */
-		std::shared_ptr<void> m_handle;
+		virtual bool Create(const ShaderCreateInfo& load_info) = 0;
 	};
 }
 

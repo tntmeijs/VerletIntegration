@@ -6,10 +6,10 @@ set(CORE_FILES
     core/keycodes.hpp)
 
 set(OPENGL_FILES
-    graphics/gl/gl_renderer.cpp
-    graphics/gl/gl_renderer.hpp
-    graphics/gl/gl_shader.cpp
-    graphics/gl/gl_shader.hpp)
+    graphics/opengl/gl_renderer.cpp
+    graphics/opengl/gl_renderer.hpp
+    graphics/opengl/gl_shader.cpp
+    graphics/opengl/gl_shader.hpp)
 
 set(GRAPHICS_FILES
     graphics/renderer.hpp
@@ -52,3 +52,7 @@ if(MSVC)
 else()
     target_compile_options(${TARGET_NAME} PRIVATE -Wall -Wextra -pedantic -Werror)
 endif()
+
+add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_SOURCE_DIR}/resources ${CMAKE_CURRENT_BINARY_DIR}/resources)
