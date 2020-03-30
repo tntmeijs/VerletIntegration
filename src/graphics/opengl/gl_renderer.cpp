@@ -70,3 +70,8 @@ void vi::gl::GLRenderer::Render()
 
 void vi::gl::GLRenderer::PostRender()
 {}
+
+vi::RenderingBackend vi::gl::GLRenderer::GetBackendType()
+{
+	return RenderingBackend::OpenGL;
+}

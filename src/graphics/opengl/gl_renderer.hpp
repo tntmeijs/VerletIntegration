@@ -1,8 +1,9 @@
-#ifndef GRAPHICS_GL_RENDERER_HPP
-#define GRAPHICS_GL_RENDERER_HPP
+#ifndef GRAPHICS_OPENGL_RENDERER_HPP
+#define GRAPHICS_OPENGL_RENDERER_HPP
 
-#include "graphics/renderer.hpp"
+#include "graphics/graphics_enums.hpp"
 #include "graphics/opengl/gl_shader.hpp"
+#include "graphics/renderer.hpp"
 
 #include <cstdint>
 
@@ -32,22 +33,29 @@ namespace vi
 			 *
 			 * @return	True when initialized successfully, false on error
 			 */
-			bool Initialize(std::uint32_t width, std::uint32_t height) final override;
+			virtual bool Initialize(std::uint32_t width, std::uint32_t height) override;
 
 			/**
 			 * Perform any actions to prepare for rendering (e.g. cull objects)
 			 */
-			void PreRender() final override;
+			virtual void PreRender() override;
 
 			/**
 			 * Render the scene
 			 */
-			void Render() final override;
+			virtual void Render() override;
 
 			/**
 			 * Any logic that should run after rendering the scene but before the frame ends
 			 */
-			void PostRender() final override;
+			virtual void PostRender() override;
+
+			/**
+			 * Used to retrieve the graphics API type from a specialized renderer instance using a base class pointer
+			 *
+			 * @return Graphics API used to instantiate this renderer
+			 */
+			virtual RenderingBackend GetBackendType() override;
 
 		private:
 			// This is all temporary until we have a few points rendering on screen
@@ -58,4 +66,4 @@ namespace vi
 	}
 }
 
-#endif //! GRAPHICS_GL_RENDERER_HPP
+#endif //! GRAPHICS_OPENGL_RENDERER_HPP

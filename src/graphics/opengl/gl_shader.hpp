@@ -1,5 +1,5 @@
-#ifndef GRAPHICS_GL_SHADER_HPP
-#define GRAPHICS_GL_SHADER_HPP
+#ifndef GRAPHICS_OPENGL_SHADER_HPP
+#define GRAPHICS_OPENGL_SHADER_HPP
 
 #include "graphics/shader.hpp"
 
@@ -53,4 +53,4 @@ namespace vi::gl
 	};
 }
 
-#endif //! GRAPHICS_GL_SHADER_HPP
+#endif //! GRAPHICS_OPENGL_SHADER_HPP

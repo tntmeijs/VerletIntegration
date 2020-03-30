@@ -9,6 +9,9 @@
 
 namespace vi
 {
+	/** Forward declarations */
+	class Mesh;
+
 	namespace gl
 	{
 		class GLRenderer;
@@ -55,6 +58,21 @@ namespace vi
 		 * Any logic that should run after rendering the scene but before the frame ends
 		 */
 		virtual void PostRender() = 0;
+
+		/**
+		 * Used to retrieve the graphics API type from a specialized renderer instance using a base class pointer
+		 *
+		 * @return Graphics API used to instantiate this renderer
+		 */
+		virtual RenderingBackend GetBackendType() = 0;
+
+	public:
+		/**
+		 * Create a new mesh object
+		 *
+		 * @return Shared pointer to the new mesh
+		 */
+		std::shared_ptr<Mesh> CreateMesh();
 	};
 }
 

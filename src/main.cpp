@@ -1,5 +1,6 @@
 #include "core/window.hpp"
 #include "graphics/graphics_enums.hpp"
+#include "graphics/mesh.hpp"
 #include "graphics/renderer.hpp"
 #include "utility/literals.hpp"
 #include "utility/log.hpp"
@@ -44,6 +45,25 @@ int main()
 		return -1;
 	}
 
+	//////////////////////////////////////////////////////////////////////////
+	// GRAPHICS API ABSTRATION TEST
+	//////////////////////////////////////////////////////////////////////////
+
+	float points[] =
+	{
+		-0.5f, -0.5f, 0.0f,
+		 0.5f, -0.5f, 0.0f,
+		 0.0f,  0.5f, 0.0f
+	};
+
+	auto mesh = renderer->CreateMesh();
+	mesh->AllocateMemory(points, sizeof(points), nullptr, 0);
+	mesh->UploadToGPU();
+
+	//////////////////////////////////////////////////////////////////////////
+	// GRAPHICS API ABSTRATION TEST
+	//////////////////////////////////////////////////////////////////////////
+
 	// The engine will run until the window needs to close
 	while (window.IsOpen())
 	{
@@ -83,6 +103,8 @@ int main()
 		// Loop timer needs to update after all logic is done
 		timer.Tick();
 	}
+
+	mesh->DeallocateMemory();
 
     return 0;
 }
