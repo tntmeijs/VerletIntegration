@@ -1,5 +1,5 @@
-#ifndef RENDERER_HPP
-#define RENDERER_HPP
+#ifndef GRAPHICS_RENDERER_HPP
+#define GRAPHICS_RENDERER_HPP
 
 namespace vi
 {
@@ -48,4 +48,4 @@ namespace vi
 	};
 }
 
-#endif //! RENDERER_HPP
+#endif //! GRAPHICS_RENDERER_HPP
