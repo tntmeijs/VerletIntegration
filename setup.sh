@@ -44,7 +44,7 @@ esac
 
 # Get GLAD to generate the necessary files
 pushd _deps/glad
-python -m glad --generator=c --out-path=GL --reproducible --profile=core
+python -m glad --generator=c --out-path=GL --reproducible --profile=core --api=gl=4.6
 popd
 
 # Ensure we have a build directory
