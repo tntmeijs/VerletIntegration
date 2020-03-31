@@ -20,29 +20,11 @@ bool vi::gl::GLRenderer::Initialize(std::uint32_t width, std::uint32_t height)
 
 	LOG_INFO("OpenGL initialized.");
 
+	//#TODO: Move this to the base renderer
+	//#TODO: Wrap the viewport stuff in a new class
 	glEnable(GL_DEPTH);
 	glClearColor(255, 255, 0, 255);
 	glViewport(0, 0, width, height);
-
-	float points[] =
-	{
-		-0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.0f,  0.5f, 0.0f
-	};
-
-	glGenBuffers(1, &vbo);
-
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), reinterpret_cast<void*>(0));
-	glEnableVertexAttribArray(0);
-
-	glBindVertexArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	LOG_INFO("OpenGL renderer initialized.");
 
@@ -56,20 +38,13 @@ bool vi::gl::GLRenderer::Initialize(std::uint32_t width, std::uint32_t height)
 	return true;
 }
 
-void vi::gl::GLRenderer::PreRender()
-{}
-
-void vi::gl::GLRenderer::Render()
+void vi::gl::GLRenderer::NewFrame()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glBindVertexArray(vao);
+	//#TODO: move this to the base renderer
 	cloth_shader.Use();
-	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
-
-void vi::gl::GLRenderer::PostRender()
-{}
 
 vi::RenderingBackend vi::gl::GLRenderer::GetBackendType()
 {

@@ -36,19 +36,9 @@ namespace vi
 			virtual bool Initialize(std::uint32_t width, std::uint32_t height) override;
 
 			/**
-			 * Perform any actions to prepare for rendering (e.g. cull objects)
+			 * Clear the back buffer to prepare for a new frame (this includes color and depth buffers)
 			 */
-			virtual void PreRender() override;
-
-			/**
-			 * Render the scene
-			 */
-			virtual void Render() override;
-
-			/**
-			 * Any logic that should run after rendering the scene but before the frame ends
-			 */
-			virtual void PostRender() override;
+			virtual void NewFrame() override;
 
 			/**
 			 * Used to retrieve the graphics API type from a specialized renderer instance using a base class pointer

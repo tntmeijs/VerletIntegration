@@ -2,6 +2,7 @@
 #include "graphics/graphics_enums.hpp"
 #include "graphics/mesh.hpp"
 #include "graphics/renderer.hpp"
+#include "graphics/vertex.hpp"
 #include "utility/literals.hpp"
 #include "utility/log.hpp"
 #include "utility/timer.hpp"
@@ -57,8 +58,23 @@ int main()
 	};
 
 	auto mesh = renderer->CreateMesh();
-	mesh->AllocateMemory(points, sizeof(points), nullptr, 0);
-	mesh->UploadToGPU();
+	if (auto mesh_ptr = mesh.lock())
+	{
+		vi::Vertex vertices[] =
+		{
+			// TEXTURE COORDINATE		POSITION				NORMAL				VERTEX COLOR
+			{ { 0.0f, 0.0f }, { -0.5f, -0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f } },
+			{ { 1.0f, 0.0f }, {  0.5f, -0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f } },
+			{ { 0.5f, 1.0f }, {  0.5f,  0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f } }
+		};
+
+		vi::MeshCreateInfo mesh_info = {};
+		mesh_info.usage = vi::MeshUsage::MeshAlwaysStatic;
+		mesh_info.vertex_data = vertices;
+		mesh_info.vertex_data_size = sizeof(vertices);
+
+		mesh_ptr->AllocateMesh(mesh_info);
+	}
 
 	//////////////////////////////////////////////////////////////////////////
 	// GRAPHICS API ABSTRATION TEST
@@ -94,17 +110,14 @@ int main()
 		interpolation;	// prevents an unused parameter warning
 
 		//#TODO: render with interpolation
-		renderer->PreRender();
+		renderer->NewFrame();
 		renderer->Render();
-		renderer->PostRender();
 
 		window.NextFrame();
 
 		// Loop timer needs to update after all logic is done
 		timer.Tick();
 	}
-
-	mesh->DeallocateMemory();
 
     return 0;
 }

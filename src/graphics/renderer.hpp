@@ -6,6 +6,7 @@
 
 #include <cstdint>
 #include <memory>
+#include <vector>
 
 namespace vi
 {
@@ -45,34 +46,39 @@ namespace vi
 		virtual bool Initialize(std::uint32_t width, std::uint32_t height) = 0;
 
 		/**
-		 * Perform any actions to prepare for rendering (e.g. cull objects)
-		 */
-		virtual void PreRender() = 0;
-
-		/**
-		 * Render the scene
-		 */
-		virtual void Render() = 0;
-
-		/**
-		 * Any logic that should run after rendering the scene but before the frame ends
-		 */
-		virtual void PostRender() = 0;
-
-		/**
 		 * Used to retrieve the graphics API type from a specialized renderer instance using a base class pointer
 		 *
 		 * @return Graphics API used to instantiate this renderer
 		 */
 		virtual RenderingBackend GetBackendType() = 0;
 
+		/**
+		 * Clear the back buffer to prepare for a new frame (this includes color and depth buffers)
+		 */
+		virtual void NewFrame() = 0;
+
+		/**
+		 * Render the scene
+		 */
+		void Render() const;
+
+		/**
+		 * Deallocate all used resources
+		 */
+		void Destroy();
+
 	public:
 		/**
-		 * Create a new mesh object
+		 * Create a new mesh object and save it in the list of meshes to render
 		 *
-		 * @return Shared pointer to the new mesh
+		 * @return Weak pointer to the new mesh
 		 */
-		std::shared_ptr<Mesh> CreateMesh();
+		std::weak_ptr<Mesh> CreateMesh();
+
+	protected:
+		//#TODO: Add a proper scene graph
+		/** All meshes that should be rendered */
+		std::vector<std::shared_ptr<Mesh>> m_mesh_list;
 	};
 }
 

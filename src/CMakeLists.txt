@@ -18,7 +18,8 @@ set(GRAPHICS_FILES
     graphics/renderer.hpp
     graphics/shader.hpp
     graphics/graphics_enums.hpp
-    graphics/mesh.hpp)
+    graphics/mesh.hpp
+    graphics/vertex.hpp)
 
 set(UTILITY_FILES
     utility/timer.cpp
