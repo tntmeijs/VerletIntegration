@@ -3,7 +3,9 @@ set(SRC_FILES main.cpp)
 set(CORE_FILES
     core/window.cpp
     core/window.hpp
-    core/keycodes.hpp)
+    core/keycodes.hpp
+    core/cloth.cpp
+    core/cloth.hpp)
 
 set(OPENGL_FILES
     graphics/opengl/gl_renderer.cpp
