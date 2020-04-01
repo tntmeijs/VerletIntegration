@@ -1,3 +1,4 @@
+#include "core/cloth.hpp"
 #include "core/window.hpp"
 #include "graphics/graphics_enums.hpp"
 #include "graphics/mesh.hpp"
@@ -72,6 +73,15 @@ int main()
 	//////////////////////////////////////////////////////////////////////////
 	// GRAPHICS API ABSTRATION TEST
 	//////////////////////////////////////////////////////////////////////////
+
+	vi::ClothCreateInfo cloth_info = {};
+	cloth_info.horizontal_point_count = 5;
+	cloth_info.vertical_point_count = 5;
+	cloth_info.total_mass = 0.250f;
+	cloth_info.resting_distance = 0.25f;
+
+	vi::Cloth cloth;
+	cloth.Generate(cloth_info);
 
 	// The engine will run until the window needs to close
 	while (window.IsOpen())
