@@ -53,20 +53,20 @@ namespace vi
 		 *		POSITION_Y
 		 *		POSITION_Z
 		 *
-		 * Attribute 1 - color
-		 *		COLOR_R
-		 *		COLOR_G
-		 *		COLOR_B
-		 *		COLOR_A
+		 * Attribute 1 - normals
+		 *		NORMAL_X
+		 *		NORMAL_Y
+		 *		NORMAL_Z
 		 *
 		 * Attribute 2 - texture coordinates
 		 *		UV_S
 		 *		UV_T
 		 *
-		 * Attribute 3 - normals
-		 *		NORMAL_X
-		 *		NORMAL_Y
-		 *		NORMAL_Z
+		 * Attribute 1 - color
+		 *		COLOR_R
+		 *		COLOR_G
+		 *		COLOR_B
+		 *		COLOR_A		 
 		 *
 		 * @param info	Mesh create information structure that contains all information needed to create a mesh
 		 *

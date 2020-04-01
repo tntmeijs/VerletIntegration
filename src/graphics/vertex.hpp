@@ -14,22 +14,20 @@ namespace vi
 	 */
 	struct Vertex
 	{
-		glm::vec2 texture_coordinate;
-
 		glm::vec3 position;
 		glm::vec3 normal;
-
+		glm::vec2 texture_coordinate;
 		glm::vec4 vertex_color;
 
 		// Useful when calculating offsets
-		static constexpr std::size_t TEXTURE_COORDINATE_SIZE_BYTES	= sizeof(glm::vec2);
-		static constexpr std::size_t TEXTURE_COORDINATE_COMPONENT_COUNT = 2;
-
 		static constexpr std::size_t POSITION_SIZE_BYTES			= sizeof(glm::vec3);
 		static constexpr std::size_t POSITION_COMPONENT_COUNT = 3;
 
 		static constexpr std::size_t NORMAL_SIZE_BYTES				= sizeof(glm::vec3);
 		static constexpr std::size_t NORMAL_COMPONENT_COUNT = 3;
+
+		static constexpr std::size_t TEXTURE_COORDINATE_SIZE_BYTES = sizeof(glm::vec2);
+		static constexpr std::size_t TEXTURE_COORDINATE_COMPONENT_COUNT = 2;
 
 		static constexpr std::size_t VERTEX_COLOR_SIZE_BYTES		= sizeof(glm::vec4);
 		static constexpr std::size_t VERTEX_COLOR_COMPONENT_COUNT = 4;

@@ -15,11 +15,13 @@ bool vi::gl::GLMesh::AllocateMesh(const MeshCreateInfo& info)
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 	glBufferData(GL_ARRAY_BUFFER, info.vertex_data_size, info.vertex_data, MeshUsageToOpenGLFlag(info.usage));
 
+	std::uint32_t stride = sizeof(Vertex);
+
 	// The order of these attributes is important, see "src/graphics/mesh.hpp" for more information
-	glVertexAttribPointer(0, Vertex::POSITION_COMPONENT_COUNT,				GL_FLOAT, GL_FALSE, Vertex::POSITION_SIZE_BYTES,			reinterpret_cast<void*>(0));
-	glVertexAttribPointer(1, Vertex::VERTEX_COLOR_COMPONENT_COUNT,			GL_FLOAT, GL_FALSE, Vertex::VERTEX_COLOR_SIZE_BYTES,		reinterpret_cast<void*>(Vertex::POSITION_SIZE_BYTES));
-	glVertexAttribPointer(2, Vertex::TEXTURE_COORDINATE_COMPONENT_COUNT,	GL_FLOAT, GL_FALSE, Vertex::TEXTURE_COORDINATE_SIZE_BYTES,	reinterpret_cast<void*>(Vertex::POSITION_SIZE_BYTES + Vertex::VERTEX_COLOR_SIZE_BYTES));
-	glVertexAttribPointer(3, Vertex::NORMAL_COMPONENT_COUNT,				GL_FLOAT, GL_FALSE, Vertex::NORMAL_SIZE_BYTES,				reinterpret_cast<void*>(Vertex::POSITION_SIZE_BYTES + Vertex::VERTEX_COLOR_SIZE_BYTES + Vertex::TEXTURE_COORDINATE_SIZE_BYTES));
+	glVertexAttribPointer(0, Vertex::POSITION_COMPONENT_COUNT,				GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(0));
+	glVertexAttribPointer(1, Vertex::NORMAL_COMPONENT_COUNT,				GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(Vertex::POSITION_SIZE_BYTES));
+	glVertexAttribPointer(2, Vertex::TEXTURE_COORDINATE_COMPONENT_COUNT,	GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(Vertex::POSITION_SIZE_BYTES + Vertex::NORMAL_SIZE_BYTES));
+	glVertexAttribPointer(3, Vertex::VERTEX_COLOR_COMPONENT_COUNT,			GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(Vertex::POSITION_SIZE_BYTES + Vertex::NORMAL_SIZE_BYTES + Vertex::TEXTURE_COORDINATE_SIZE_BYTES));
 
 	//#TODO: Allow vertex attributes to be disabled
 	glEnableVertexAttribArray(0);

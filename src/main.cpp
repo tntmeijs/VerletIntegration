@@ -50,22 +50,15 @@ int main()
 	// GRAPHICS API ABSTRATION TEST
 	//////////////////////////////////////////////////////////////////////////
 
-	float points[] =
-	{
-		-0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.0f,  0.5f, 0.0f
-	};
-
 	auto mesh = renderer->CreateMesh();
 	if (auto mesh_ptr = mesh.lock())
 	{
 		vi::Vertex vertices[] =
 		{
-			// TEXTURE COORDINATE		POSITION				NORMAL				VERTEX COLOR
-			{ { 0.0f, 0.0f }, { -0.5f, -0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f, 1.0f } },
-			{ { 1.0f, 0.0f }, {  0.5f, -0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f } },
-			{ { 0.5f, 1.0f }, {  0.5f,  0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f } }
+			//		POSITION				NORMAL				UV				VERTEX COLOR
+			{ { -0.5f, -0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f }, { 1.0f, 0.0f, 1.0f, 1.0f } },
+			{ {  0.5f, -0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f }, { 0.0f, 1.0f, 1.0f, 1.0f } },
+			{ {  0.0f,  0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 0.5f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f } }
 		};
 
 		vi::MeshCreateInfo mesh_info = {};
