@@ -1,5 +1,5 @@
-#ifndef KEYCODES_HPP
-#define KEYCODES_HPP
+#ifndef CORE_KEYCODES_HPP
+#define CORE_KEYCODES_HPP
 
 namespace vi
 {
@@ -44,4 +44,4 @@ namespace vi
 	};
 }
 
-#endif //! KEYCODES_HPP
+#endif //! CORE_KEYCODES_HPP

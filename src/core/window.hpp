@@ -1,5 +1,5 @@
-#ifndef WINDOW_HPP
-#define WINDOW_HPP
+#ifndef CORE_WINDOW_HPP
+#define CORE_WINDOW_HPP
 
 #include "keycodes.hpp"
 #include "graphics/graphics_enums.hpp"
@@ -118,4 +118,4 @@ namespace vi
 	};
 }
 
-#endif //! WINDOW_HPP
+#endif //! CORE_WINDOW_HPP
