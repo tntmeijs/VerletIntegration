@@ -13,11 +13,6 @@ namespace vi
 	/** Forward declarations */
 	class Mesh;
 
-	namespace gl
-	{
-		class GLRenderer;
-	}
-
 	/**
 	 * Base class for a rendering back-end
 	 * All rendering back-ends should derive from this class
