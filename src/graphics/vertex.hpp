@@ -17,7 +17,7 @@ namespace vi
 		glm::vec3 position;
 		glm::vec3 normal;
 		glm::vec2 texture_coordinate;
-		glm::vec4 vertex_color;
+		glm::vec4 color;
 
 		// Useful when calculating offsets
 		static constexpr std::size_t POSITION_SIZE_BYTES			= sizeof(glm::vec3);

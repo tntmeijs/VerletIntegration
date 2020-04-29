@@ -44,10 +44,10 @@ namespace vi
 	struct ClothCreateInfo
 	{
 		/** Number of cloth particles to create horizontally */
-		std::uint32_t horizontal_point_count;
+		std::uint32_t horizontal_cell_count;
 
 		/** Number of cloth particles to create vertically */
-		std::uint32_t vertical_point_count;
+		std::uint32_t vertical_cell_count;
 
 		/** Total mass of this cloth */
 		float total_mass;
@@ -64,8 +64,24 @@ namespace vi
 	public:
 		/**
 		 * Create a new cloth object
+		 *
+		 * @param info	Cloth create information
 		 */
 		void Generate(const ClothCreateInfo& info);
+
+		/**
+		 * Get all vertices needed to render this cloth
+		 *
+		 * @return Vector of vertices
+		 */
+		const std::vector<Vertex>& GetVertices() const;
+
+		/**
+		 * Get all indices needed to render this cloth
+		 *
+		 * @return Vector of indices
+		 */
+		const std::vector<std::uint32_t>& GetIndices() const;
 
 	private:
 		/** Fibers that make up the entire cloth */

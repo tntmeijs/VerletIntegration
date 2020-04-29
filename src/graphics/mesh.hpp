@@ -29,7 +29,6 @@ namespace vi
 		// Vertex data
 		const Vertex* vertex_data;
 		std::size_t vertex_data_size;
-		std::uint32_t vertex_stride_bytes;
 		
 		// Index data
 		const std::uint32_t* index_data;

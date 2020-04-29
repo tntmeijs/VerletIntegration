@@ -47,41 +47,34 @@ int main()
 		return -1;
 	}
 
-	//////////////////////////////////////////////////////////////////////////
-	// GRAPHICS API ABSTRATION TEST
-	//////////////////////////////////////////////////////////////////////////
+	// ------------------------------------------------------------------------
+	// Cloth Test
+	// ------------------------------------------------------------------------
 
-	auto mesh = renderer->CreateMesh();
-	if (auto mesh_ptr = mesh.lock())
-	{
-		vi::Vertex vertices[] =
-		{
-			//		POSITION				NORMAL				UV				VERTEX COLOR
-			{ { -0.5f, -0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f }, { 1.0f, 0.0f, 1.0f, 1.0f } },
-			{ {  0.5f, -0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f }, { 0.0f, 1.0f, 1.0f, 1.0f } },
-			{ {  0.0f,  0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 0.5f, 1.0f }, { 0.0f, 1.0f, 0.0f, 1.0f } }
-		};
-
-		vi::MeshCreateInfo mesh_info = {};
-		mesh_info.usage = vi::MeshUsage::MeshAlwaysStatic;
-		mesh_info.vertex_data = vertices;
-		mesh_info.vertex_data_size = sizeof(vertices);
-
-		mesh_ptr->AllocateMesh(mesh_info);
-	}
-
-	//////////////////////////////////////////////////////////////////////////
-	// GRAPHICS API ABSTRATION TEST
-	//////////////////////////////////////////////////////////////////////////
-
-	vi::ClothCreateInfo cloth_info = {};
-	cloth_info.horizontal_point_count = 5;
-	cloth_info.vertical_point_count = 5;
-	cloth_info.total_mass = 0.250f;
-	cloth_info.resting_distance = 0.25f;
+	vi::ClothCreateInfo cloth_info		= {};
+	cloth_info.horizontal_cell_count	= 100;
+	cloth_info.vertical_cell_count		= 100;
+	cloth_info.total_mass				= 0.250f;
+	cloth_info.resting_distance			= 0.25f;
 
 	vi::Cloth cloth;
 	cloth.Generate(cloth_info);
+
+	if (auto mesh = renderer->CreateMesh().lock())
+	{
+		vi::MeshCreateInfo mesh_info	= {};
+		mesh_info.usage					= vi::MeshUsage::MeshDynamicUpdate;
+		mesh_info.vertex_data			= cloth.GetVertices().data();
+		mesh_info.index_data			= cloth.GetIndices().data();
+		mesh_info.vertex_data_size		= cloth.GetVertices().size() * sizeof(vi::Vertex);
+		mesh_info.index_data_size		= cloth.GetIndices().size() * sizeof(std::uint32_t);
+
+		mesh->AllocateMesh(mesh_info);
+	}
+
+	// ------------------------------------------------------------------------
+	// Cloth Test
+	// ------------------------------------------------------------------------
 
 	// The engine will run until the window needs to close
 	while (window.IsOpen())
